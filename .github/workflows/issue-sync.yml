@@ -8,7 +8,10 @@ on:
       projectId:
         description: 'Project number'
         required: true
-        
+  push:
+    branches:
+      - main
+
 jobs:
   track_issue:
     runs-on: ubuntu-latest
@@ -17,7 +20,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
           ORGANIZATION: paritytech-stg
-          PROJECT_NUMBER: ${{ github.event.inputs.name }}
+          PROJECT_NUMBER: 4
         run: |
           gh api graphql -f query='
             query($org: String!, $number: Int!) {
@@ -36,11 +39,13 @@ jobs:
             }' -f org=$ORGANIZATION -F number=$PROJECT_NUMBER > project_data.json
 
           echo 'PROJECT_ID='$(jq '.data.organization.projectNext.id' project_data.json) >> $GITHUB_ENV
+
+          echo 'PROJECT_ID='$(jq '.data.organization.projectNext.id' project_data.json)
                     
       - name: Add issue to project
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
-          ISSUE_ID: ${{ github.event.inputs.issueId }}
+          ISSUE_ID: 1
         run: |
           item_id="$( gh api graphql -f query='
             mutation($project:ID!, $issue:ID!) {
