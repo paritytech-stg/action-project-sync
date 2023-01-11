@@ -17,6 +17,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
           ORGANIZATION: paritytech-stg
+          PROJECT_NUMBER: ${{ github.event.inputs.name }}
         run: |
           gh api graphql -f query='
             query($org: String!, $number: Int!) {
@@ -32,13 +33,14 @@ jobs:
                   }
                 }
               }
-            }' -f org=$ORGANIZATION -F number=${{ github.event.inputs.name }} > project_data.json
+            }' -f org=$ORGANIZATION -F number=$PROJECT_NUMBER > project_data.json
 
           echo 'PROJECT_ID='$(jq '.data.organization.projectNext.id' project_data.json) >> $GITHUB_ENV
                     
       - name: Add issue to project
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
+          ISSUE_ID: ${{ github.event.inputs.issueId }}
         run: |
           item_id="$( gh api graphql -f query='
             mutation($project:ID!, $issue:ID!) {
@@ -47,4 +49,4 @@ jobs:
                   id
                 }
               }
-            }' -f project=$PROJECT_ID -f issue=${{ github.event.inputs.issueId }} --jq '.data.addProjectNextItem.projectNextItem.id')"  
+            }' -f project=$PROJECT_ID -f issue=$ISSUE_ID --jq '.data.addProjectNextItem.projectNextItem.id')"          
