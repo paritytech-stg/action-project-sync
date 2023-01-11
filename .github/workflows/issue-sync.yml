@@ -1,16 +1,8 @@
 name: Add issue to project
 on:
-  workflow_dispatch:
-    inputs:
-      issueId:
-        description: 'Issue ID'
-        required: true
-      projectId:
-        description: 'Project number'
-        required: true
-  push:
-    branches:
-      - main
+  issues:
+    types:
+      - opened
 
 jobs:
   track_issue:
@@ -45,7 +37,7 @@ jobs:
       - name: Add issue to project
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
-          ISSUE_ID: 1
+          ISSUE_ID: ${{ github.event.issue.node_id }}
         run: |
           item_id="$( gh api graphql -f query='
             mutation($project:ID!, $issue:ID!) {
