@@ -1,8 +1,4 @@
 name: Add issue to project
-on:
-  issues:
-    types:
-      - opened
 
 jobs:
   track_issue:
