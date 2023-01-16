@@ -1,0 +1,22 @@
+name: Add issue to project
+on: ["push"]
+
+jobs:
+  get-project-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get project data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
+          ORGANIZATION: paritytech-stg
+          PROJECT_NUMBER: 3
+        run: |
+          gh api graphql -f query='
+            query($org: String!, $number: Int!) {
+              organization(login: $org){
+                projectV2(number: $number) {
+                  id
+                  title
+                }
+              }
+            }' -f org=$ORGANIZATION -F number=$PROJECT_NUMBER 
