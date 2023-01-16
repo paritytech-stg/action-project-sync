@@ -24,7 +24,7 @@ jobs:
           # - "write:org" is used to assign issues to the project's board
           # - "repo" is used to access issues through the API
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PROJECT_TOKEN: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
+          PROJECT_TOKEN: ${{ secrets.GH_APP_TOKEN_ACCESS }}
 
           # The number of the project which the issues will be synced to
           project: 4
