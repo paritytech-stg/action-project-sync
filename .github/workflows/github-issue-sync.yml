@@ -11,6 +11,7 @@ on:
       excludeClosed:
         description: 'Exclude closed issues in the sync.'
         type: boolean 
+        default: true
 
 jobs:
   sync:
