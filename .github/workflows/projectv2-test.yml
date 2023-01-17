@@ -4,12 +4,12 @@ on: ["push"]
 jobs:
   get-project-data:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
+      ORGANIZATION: paritytech-stg
+      PROJECT_NUMBER: 3
     steps:
       - name: Get project data
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
-          ORGANIZATION: paritytech-stg
-          PROJECT_NUMBER: 3
         run: |
           gh api graphql -f query='
             query($org: String!, $number: Int!) {
