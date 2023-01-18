@@ -17,12 +17,12 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate token
-        id: generate_token
-        uses: tibdex/github-app-token@v1
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.PRIVATE_KEY }}
+      # - name: Generate token
+      #   id: generate_token
+      #   uses: tibdex/github-app-token@v1
+      #   with:
+      #     app_id: ${{ secrets.APP_ID }}
+      #     private_key: ${{ secrets.PRIVATE_KEY }}
       - name: Sync issues
         uses: bullrich/github-issue-sync@upgrade-graphql
         with:
@@ -31,7 +31,7 @@ jobs:
           # - "read:org" is used to read the project's board
           # - "write:org" is used to assign issues to the project's board
           # - "repo" is used to access issues through the API
-          PROJECT_TOKEN: ${{ steps.generate_token.outputs.token }}
+          PROJECT_TOKEN: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
 
           # The number of the project which the issues will be synced to
           project: 4
