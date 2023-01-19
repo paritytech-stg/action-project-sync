@@ -24,7 +24,7 @@ jobs:
       #     app_id: ${{ secrets.APP_ID }}
       #     private_key: ${{ secrets.PRIVATE_KEY }}
       - name: Sync issues
-        uses: bullrich/github-issue-sync@upgrade-graphql
+        uses: bullrich/github-issue-sync@custom-project-fields
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # The token needs to have the following permissions
@@ -37,8 +37,8 @@ jobs:
           project: 4
 
           # The name of the project field which the issue will be assigned to
-          target-project-field: Team
+          project_field: Status
 
           # The value which will be set in the field, in this case the team's
           # name
-          target-project-field-value: Foo
+          project_value: "In Progress"
