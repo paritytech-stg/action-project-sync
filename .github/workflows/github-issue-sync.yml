@@ -41,4 +41,4 @@ jobs:
 
           # The value which will be set in the field, in this case the team's
           # name
-          project_value: "In Progress"
+          project_value: "In Progression"
