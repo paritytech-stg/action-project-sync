@@ -22,7 +22,7 @@ jobs:
           - field: Status
             value: "In Progress"
           - field: Status
-            value: "Done"
+            value: "Doneso"
 
     steps:
       # - name: Generate token
