@@ -32,7 +32,7 @@ jobs:
       #     app_id: ${{ secrets.APP_ID }}
       #     private_key: ${{ secrets.PRIVATE_KEY }}
       - name: Sync issues
-        uses: bullrich/github-issue-sync@custom-project-fields
+        uses: bullrich/github-issue-sync@labels-support
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # The token needs to have the following permissions
