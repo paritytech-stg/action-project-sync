@@ -1,5 +1,5 @@
 name: Add issue to project
-on: ["push"]
+# on: ["push"]
 
 jobs:
   get-project-data:

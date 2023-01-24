@@ -24,22 +24,28 @@ jobs:
       #   with:
       #     app_id: ${{ secrets.APP_ID }}
       #     private_key: ${{ secrets.PRIVATE_KEY }}
-      - name: Sync issues
+      - name: Sync labeled issues
+        # if: github.event_name == "labeled"
         uses: bullrich/github-issue-sync@labels-support
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # The token needs to have the following permissions
-          # - "read:org" is used to read the project's board
-          # - "write:org" is used to assign issues to the project's board
-          # - "repo" is used to access issues through the API
           PROJECT_TOKEN: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
-
-          # The number of the project which the issues will be synced to
           project: 4
-
-          # The name of the project field which the issue will be assigned to
           project_field: Status
-
-          # The value which will be set in the field, in this case the team's
-          # name
           project_value: In progress
+          labels: |
+            duplicate
+            good first issue 
+        env:
+          ACTIONS_RUNNER_DEBUG: true
+      - name: Sync other issues
+        # if: github.event_name != "labeled"
+        uses: bullrich/github-issue-sync@labels-support
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROJECT_TOKEN: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
+          project: 4
+          project_field: Status
+          project_value: In progress
+        env:
+          ACTIONS_RUNNER_DEBUG: true
