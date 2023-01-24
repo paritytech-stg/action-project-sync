@@ -33,9 +33,7 @@ jobs:
           project: 4
           project_field: Status
           project_value: In progress
-          labels: |
-            duplicate
-            good first issue 
+          labels: duplicate
         env:
           ACTIONS_RUNNER_DEBUG: true
       - name: Sync other issues
