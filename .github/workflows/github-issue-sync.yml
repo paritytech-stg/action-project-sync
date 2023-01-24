@@ -16,13 +16,6 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - field: Status
-            value: "In Progress"
-          - field: Status
-            value: "Doneso"
 
     steps:
       # - name: Generate token
@@ -45,8 +38,8 @@ jobs:
           project: 4
 
           # The name of the project field which the issue will be assigned to
-          project_field: ${{ matrix.field }}
+          project_field: Status
 
           # The value which will be set in the field, in this case the team's
           # name
-          project_value: ${{ matrix.value }}
+          project_value: In progress
