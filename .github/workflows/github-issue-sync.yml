@@ -36,14 +36,14 @@ jobs:
           labels: duplicate
         env:
           ACTIONS_RUNNER_DEBUG: true
-      - name: Sync other issues
-        # if: github.event_name != "labeled"
-        uses: bullrich/github-issue-sync@labels-support
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PROJECT_TOKEN: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
-          project: 4
-          project_field: Status
-          project_value: In progress
-        env:
-          ACTIONS_RUNNER_DEBUG: true
+      # - name: Sync other issues
+      #   # if: github.event_name != "labeled"
+      #   uses: bullrich/github-issue-sync@labels-support
+      #   with:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     PROJECT_TOKEN: ${{ secrets.GH_TOKEN_PROJECT_ACCESS }}
+      #     project: 4
+      #     project_field: Status
+      #     project_value: In progress
+      #   env:
+      #     ACTIONS_RUNNER_DEBUG: true
