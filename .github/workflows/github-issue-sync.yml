@@ -26,7 +26,7 @@ jobs:
           private_key: ${{ secrets.PRIVATE_KEY }}
       - name: Sync labeled issues
         # if: github.event_name == "labeled"
-        uses: bullrich/github-issue-sync@labels-support
+        uses: bullrich/github-issue-sync@vtest.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PROJECT_TOKEN: ${{ steps.generate_token.outputs.token }}
@@ -38,7 +38,7 @@ jobs:
           ACTIONS_RUNNER_DEBUG: true
       - name: Sync other issues
         # if: github.event_name != "labeled"
-        uses: bullrich/github-issue-sync@labels-support
+        uses: bullrich/github-issue-sync@vtest.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PROJECT_TOKEN: ${{ steps.generate_token.outputs.token }}
